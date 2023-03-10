@@ -1,4 +1,5 @@
-import { BackButton, BackIcon, Container, Logo } from "./styles";
+import { BackButton, Container, Logo } from "./styles";
+import { Feather } from "@expo/vector-icons";
 
 import logo from "@assets/Logo.png";
 
@@ -11,7 +12,7 @@ export function Header({ showBackButton = false }: HeaderProps) {
     <Container>
       {showBackButton && (
         <BackButton>
-          <BackIcon />
+          <Feather name='chevron-left' size={32} color='white' />
         </BackButton>
       )}
       <Logo source={logo} />
