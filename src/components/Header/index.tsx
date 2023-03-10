@@ -1,12 +1,19 @@
-import { Container, Logo } from "./styles";
-import { Ionicons } from "@expo/vector-icons";
+import { BackButton, BackIcon, Container, Logo } from "./styles";
 
 import logo from "@assets/Logo.png";
 
-export function Header() {
+type HeaderProps = {
+  showBackButton?: boolean;
+};
+
+export function Header({ showBackButton = false }: HeaderProps) {
   return (
     <Container>
-      <Ionicons name='chevron-back' size={32} color='#FFF' />
+      {showBackButton && (
+        <BackButton>
+          <BackIcon />
+        </BackButton>
+      )}
       <Logo source={logo} />
     </Container>
   );
