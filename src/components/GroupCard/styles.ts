@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components/native";
-// import { UsersThree } from "phosphor-react-native";
 import { TouchableOpacity } from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 export const Container = styled(TouchableOpacity)`
   width: 100%;
@@ -24,9 +24,9 @@ export const Title = styled.Text`
   `}
 `;
 
-// export const Icon = styled(UsersThree).attrs(({ theme }) => ({
-//   color: theme.COLORS.GREEN_700,
-//   size: 32,
-// }))`
-//   margin-right: 20px;
-// `;
+export const Icon = styled(FontAwesome5).attrs(({ theme }) => ({
+  color: theme.COLORS.GREEN_700,
+  size: 32,
+}))`
+  margin-right: 20px;
+`;

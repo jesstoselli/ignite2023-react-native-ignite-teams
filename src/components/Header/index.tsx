@@ -1,5 +1,5 @@
-import { BackButton, Container, Logo } from "./styles";
-import { Feather } from "@expo/vector-icons";
+import { BackButton, BackIcon, Container, Logo } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 import logo from "@assets/Logo.png";
 
@@ -8,11 +8,17 @@ type HeaderProps = {
 };
 
 export function Header({ showBackButton = false }: HeaderProps) {
+  const navigation = useNavigation();
+
+  function handleGoBack() {
+    navigation.navigate("groups");
+  }
+
   return (
     <Container>
       {showBackButton && (
-        <BackButton>
-          <Feather name='chevron-left' size={32} color='white' />
+        <BackButton onPress={handleGoBack}>
+          <BackIcon name='chevron-left' />
         </BackButton>
       )}
       <Logo source={logo} />

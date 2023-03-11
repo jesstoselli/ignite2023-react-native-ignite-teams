@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-// import { CaretLeft } from "phosphor-react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export const Container = styled.View`
   width: 100%;
@@ -16,6 +16,11 @@ export const Logo = styled.Image`
 export const BackButton = styled.TouchableOpacity`
   flex: 1;
 `;
+
+export const BackIcon = styled(MaterialIcons).attrs(({ theme }) => ({
+  size: 32,
+  color: theme.COLORS.WHITE,
+}))``;
 
 // export const BackIcon = styled(CaretLeft).attrs(({ theme }) => ({
 //   color: theme.COLORS.WHITE,

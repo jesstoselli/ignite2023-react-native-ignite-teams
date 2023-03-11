@@ -1,6 +1,5 @@
 import { TouchableOpacityProps } from "react-native";
-import { Container, Title } from "./styles";
-import { Feather } from "@expo/vector-icons";
+import { Container, Icon, Title } from "./styles";
 
 type GroupCardProps = TouchableOpacityProps & {
   title: string;
@@ -9,12 +8,7 @@ type GroupCardProps = TouchableOpacityProps & {
 export function GroupCard({ title, ...rest }: GroupCardProps) {
   return (
     <Container {...rest}>
-      <Feather
-        name='users'
-        size={32}
-        color='#00875F'
-        style={{ marginRight: 20 }}
-      />
+      <Icon name='users' />
       <Title>{title}</Title>
     </Container>
   );
