@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 // Components
 import { Header } from "@components/Header";
@@ -11,15 +11,40 @@ import { Button } from "@components/Button";
 
 // Styles
 import { Container } from "./styles";
+import { groupsRetrieve } from "@storage/group/groupRetrieve";
 
 export function Groups() {
-  const [groups, setGroups] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [groups, setGroups] = useState<string[]>([]);
 
   const navigation = useNavigation();
 
   function handleNewGroup() {
     navigation.navigate("new-group");
   }
+
+  async function fetchStoredGroups() {
+    try {
+      setIsLoading(true);
+      const data = await groupsRetrieve();
+      setGroups(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function handleOpenGroup(group: string) {
+    navigation.navigate("players", { group });
+  }
+
+  // executa sempre que retornar para a tela, mesmo que com backButton
+  useFocusEffect(
+    useCallback(() => {
+      fetchStoredGroups();
+    }, [])
+  );
 
   return (
     <Container>
@@ -29,7 +54,9 @@ export function Groups() {
       <FlatList
         data={groups}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <GroupCard title={item} />}
+        renderItem={({ item }) => (
+          <GroupCard title={item} onPress={() => handleOpenGroup(item)} />
+        )}
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
         ListEmptyComponent={() => (
           <EmptyList message='Que tal cadastrar a primeira turma?' />
